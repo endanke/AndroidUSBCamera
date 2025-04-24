@@ -638,6 +638,46 @@ public class UVCCamera {
 		return mBrightnessMin;
 	}
 
+	/**
+     * @param Exposure [%]
+     */
+	public synchronized void setExposure(final int exposure) {
+    	if (mNativePtr != 0) {
+ 		   final float range = Math.abs(mExposureMax - mExposureMin);
+ 		   if (range > 0)
+ 			   nativeSetExposure(mNativePtr, (int)(exposure / 100.f * range) + mExposureMin);
+    	}
+    }
+
+    /**
+     * @param Exposure_abs
+     * @return Exposure[%]
+     */
+	public synchronized int getExposure(final int exposure_abs) {
+	   int result = 0;
+	   if (mNativePtr != 0) {
+		   nativeUpdateExposureLimit(mNativePtr);
+		   final float range = Math.abs(mExposureMax - mExposureMin);
+		   if (range > 0) {
+			   result = (int)((exposure_abs - mExposureMin) * 100.f / range);
+		   }
+	   }
+	   return result;
+	}
+
+    /**
+     * @return brightness[%]
+     */
+	public synchronized int getBrightness() {
+    	return getBrightness(nativeGetBrightness(mNativePtr));
+    }
+
+	public synchronized void resetExposure() {
+    	if (mNativePtr != 0) {
+    		nativeSetExposure(mNativePtr, mExposureDef);
+    	}
+    }
+
 //================================================================================
     /**
      * @param contrast [%]

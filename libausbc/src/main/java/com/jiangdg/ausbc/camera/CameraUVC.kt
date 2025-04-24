@@ -443,6 +443,27 @@ class CameraUVC(ctx: Context, device: UsbDevice) : MultiCameraClient.ICamera(ctx
     }
 
     /**
+     * Set Exposure
+     *
+     * @param Exposure Exposure value, 0 means reset
+     */
+    fun setExposure(exposure: Int) {
+        mUvcCamera?.exposure = exposure
+    }
+
+    /**
+     * Get Exposure
+     */
+    fun getExposure() = mUvcCamera?.exposure
+    
+    /**
+     * Reset brightnes
+     */
+    fun resetExposure() {
+        mUvcCamera?.resetExposure()
+    }
+
+    /**
      * Set contrast
      *
      * @param contrast contrast value, 0 means reset

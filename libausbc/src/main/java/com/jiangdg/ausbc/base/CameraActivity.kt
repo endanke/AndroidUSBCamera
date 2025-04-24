@@ -560,6 +560,46 @@ abstract class CameraActivity: BaseActivity(), ICameraStateCallBack {
     }
 
     /**
+     * Set Exposure
+     *
+     * @param Exposure camera Exposure
+     */
+    protected fun setExposure(exposure: Int) {
+        getCurrentCamera()?.let { camera ->
+            if (camera !is CameraUVC) {
+                return
+            }
+            camera.setExposure(exposure)
+        }
+    }
+
+    /**
+     * Get Exposure
+     *
+     * @return current Exposure value
+     */
+    protected fun getExposure(): Int? {
+        return getCurrentCamera()?.let { camera ->
+            if (camera !is CameraUVC) {
+                return@let null
+            }
+            camera.getExposure()
+        }
+    }
+
+    /**
+     * Reset Exposure
+     */
+    protected fun resetExposure() {
+        getCurrentCamera()?.let { camera ->
+            if (camera !is CameraUVC) {
+                return
+            }
+            camera.resetExposure()
+        }
+    }
+
+    /**
      * Set contrast
      *
      * @param contrast camera contrast

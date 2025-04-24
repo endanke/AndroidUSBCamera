@@ -691,6 +691,20 @@ class CameraUvcStrategy(ctx: Context) : ICameraStrategy(ctx) {
     fun getBrightness() = mUVCCamera?.brightness
 
     /**
+     * Set exposure
+     *
+     * @param exposure exposure value, 0 means reset
+     */
+    fun setExposure(exposure: Int) {
+        mUVCCamera?.exposure = exposure
+    }
+
+    /**
+     * Get exposure
+     */
+    fun getExposure() = mUVCCamera?.exposure
+
+    /**
      * Set contrast
      *
      * @param contrast contrast value, 0 means reset
